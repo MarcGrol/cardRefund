@@ -110,20 +110,29 @@ func refundDisplayScreen(w http.ResponseWriter, refund *model.CardRefund) {
     <form>
         <div class="form-group">
             <label for="cardNumber">cardNumber</label>
-            <input type="text" name="cardNumber" value="{{.CardNumber}}" readonly="true" class="form-control"/>
+            <input type="text" name="cardNumber" value="{{.CardNumber}}" readonly class="form-control"/>
         </div>
         <div class="form-group">
             <label for="ownerEmailAddress">ownerEmailAddress</label>
-            <input type="email" name="ownerEmailAddress" value="{{.Owner.EmailAddress}}" readonly="true" class="form-control"/>
+            <input type="email" name="ownerEmailAddress" value="{{.Owner.EmailAddress}}" readonly class="form-control"/>
         </div>
         <div class="form-group">
 			<label for="ownerFullName">ownerFullName</label>
-			<input type="text" name="ownerFullName" value="{{.Owner.FullName}}" readonly="true" class="form-control"/>
+			<input type="text" name="ownerFullName" value="{{.Owner.FullName}}" readonly class="form-control"/>
 		</div>
 		<div class="form-group">
 			<label for="ownerBankAccountNumber">ownerBankAccountNumber</label>
-			<input type="text" name="ownerBankAccountNumber" value="{{.Owner.BankAccountNumber}}" readonly="true" class="form-control"/>
+			<input type="text" name="ownerBankAccountNumber" value="{{.Owner.BankAccountNumber}}" readonly class="form-control"/>
 		</div>
+		<div class="form-group">
+			<label for="remainingMoneySet">remainingMoneySet</label>
+			<input type="text" name="remainingMoneySet" value="{{StringBool .RemainingMoneySet}}" class="form-control" readonly />
+		</div>
+		<div class="form-group">
+			<label for="remainingMoney">remainingMoney</label>
+			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control" {{ReadOnly .RemainingMoneySet}} />
+		</div>
+
 	<form>
 	<img src="/user/cardrefund/{{.CardNumber}}/qrcode" alt="QR code" height="250" width="250" />
 	<a href="/_ah/cardrefund/{{.CardNumber}}">Url behind qr-code</a>
@@ -133,7 +142,7 @@ func refundDisplayScreen(w http.ResponseWriter, refund *model.CardRefund) {
 }
 
 func refundAdminScreen(w http.ResponseWriter, refund *model.CardRefund) {
-
+	log.Printf("%+v", refund)
 	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 	applyTemplateToString(w, "refundAdminScreen",
 		`<html>
@@ -151,28 +160,28 @@ func refundAdminScreen(w http.ResponseWriter, refund *model.CardRefund) {
     <form action="/_ah/cardrefund/{{.CardNumber}}" method="POST">
         <div class="form-group">
             <label for="cardNumber">cardNumber</label>
-            <input type="text" name="cardNumber" value="{{.CardNumber}}" readonly="true" class="form-control"/>
+            <input type="text" name="cardNumber" value="{{.CardNumber}}" readonly class="form-control"/>
         </div>
         <div class="form-group">
             <label for="ownerEmailAddress">ownerEmailAddress</label>
-            <input type="email" name="ownerEmailAddress" value="{{.Owner.EmailAddress}}" readonly="true" class="form-control"/>
+            <input type="email" name="ownerEmailAddress" value="{{.Owner.EmailAddress}}" readonly class="form-control"/>
         </div>
         <div class="form-group">
 			<label for="ownerFullName">ownerFullName</label>
-			<input type="text" name="ownerFullName" value="{{.Owner.FullName}}" readonly="true" class="form-control"/>
+			<input type="text" name="ownerFullName" value="{{.Owner.FullName}}" readonly class="form-control"/>
 		</div>
 		<div class="form-group">
 			<label for="ownerBankAccountNumber">ownerBankAccountNumber</label>
-			<input type="text" name="ownerBankAccountNumber" value="{{.Owner.BankAccountNumber}}" readonly="true" class="form-control"/>
+			<input type="text" name="ownerBankAccountNumber" value="{{.Owner.BankAccountNumber}}" readonly class="form-control"/>
 		</div>
 
 		<div class="form-group">
-			<label for="RemainingMoneySet">RemainingMoneySet</label>
-			<input type="number" name="RemainingMoneySet" value="{{.RemainingMoneySet}}" class="form-control"/>
+			<label for="remainingMoneySet">remainingMoneySet</label>
+			<input type="text" name="remainingMoneySet" value="{{StringBool .RemainingMoneySet}}" class="form-control" readonly />
 		</div>
 		<div class="form-group">
 			<label for="remainingMoney">remainingMoney</label>
-			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control"/>
+			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control" {{ReadOnly .RemainingMoneySet}} />
 		</div>
 
 		<button type="submit" class="btn btn-primary"><br/>
@@ -211,6 +220,8 @@ func applyTemplateToString(w io.Writer, templateName string, templateItself stri
 var customTemplateFuncs = template.FuncMap{
 	"FormatDateTime": formatDateTime,
 	"FormatDate":     formatDate,
+	"ReadOnly":       readOnly,
+	"StringBool":     stringBool,
 }
 
 func formatDateTime(dt *time.Time) string {
@@ -222,4 +233,15 @@ func formatDateTime(dt *time.Time) string {
 
 func formatDate(d time.Time) string {
 	return time.Time(d).Format("2006-01-02")
+}
+
+func readOnly(is bool) string {
+	if is {
+		return `readonly`
+	}
+	return ""
+}
+
+func stringBool(b bool) string {
+	return fmt.Sprintf("%v", b)
 }

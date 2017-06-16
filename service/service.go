@@ -194,7 +194,7 @@ func (crs CardReturnService) submitRemainingMoney(c context.Context, w http.Resp
 		return
 	}
 
-	remainingMoneyString := r.FormValue("remainingMoneyString")
+	remainingMoneyString := r.FormValue("remainingMoney")
 	remainingMoney, err := strconv.Atoi(remainingMoneyString)
 	log.Printf("%s -> %d", remainingMoneyString, remainingMoney)
 	req := setRemainingMoneyRequest{
