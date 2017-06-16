@@ -20,7 +20,6 @@ all: gen test install
 help:
 	@echo "\tdeps: installs all dependencies"
 	@echo "\tgen: generates boilerplate code"
-	@echo "\tfrontend: Run all frontend tests"
 	@echo "\tbackend: Run all backend tests"
 	@echo "\ttest: Run all tests"
 	@echo "\trun: Run application locally in dev mode"
@@ -47,7 +46,6 @@ deps:
 	$(CARD_REFUND_ROOT)/scripts/get_appengine.sh    # Need appengine to run goapp tests and to deploy
 	$(CARD_REFUND_ROOT)/scripts/get_gcloud.sh       # Need gcloud to perform deployment
 	(cd emails; yarn install; yarn run build;)          # build email templates (used in backend)
-	(cd frontend; yarn install;)                        # prepare environment for frontend application
 
 verify:
 	@echo "----------------------------"
@@ -131,15 +129,9 @@ clearrun:
 
 deploy:
 	@echo "---------------------------------------------------------------"
-	@echo "Deploying interactively $(APP_NAME):$(APP_VERSION) to the cloud"
+	@echo "Deploying interactively $(PROD_APP_NAME):$(PROD_APP_VERSION) to the cloud"
 	@echo "---------------------------------------------------------------"
-	./scripts/interactivedeploy.sh $(APP_NAME) $(APP_VERSION)
-
-travisdeploy:
-	@echo "---------------------------------------------------------------"
-	@echo "Deploying automated $(APP_NAME):$(APP_VERSION) to the cloud"
-	@echo "---------------------------------------------------------------"
-	./scripts/travisdeploy.sh $(APP_NAME) $(APP_VERSION)
+	./scripts/interactivedeploy.sh $(PROD_APP_NAME) $(PROD_APP_VERSION)
 
 prodvars:
 	$(eval APP_NAME := $(PROD_APP_NAME))
@@ -150,9 +142,9 @@ prodvars:
 	$(eval ANALYTICS_UID := $(PROD_ANALYTICS_UID))
 	$(eval GTM_CONTAINER_ID := $(PROD_GTM_CONTAINER_ID))
 
-prodbuild: prodvars frontend backend
+prodbuild: prodvars backend
 
-proddeploy: prodbuild travisdeploy
+proddeploy: prodbuild deploy
 
 .PHONY:
 	help deps verify gen test backendtest backend coverage install clean run e2erun \

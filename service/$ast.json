@@ -532,9 +532,8 @@
 					"tag": "`json:\"cardNumber\"`"
 				},
 				{
-					"packageName": "github.com/MarcGrol/cardRefund/events/cardRefundEvents",
 					"name": "RemainingMoney",
-					"typeName": "cardRefundEvents.Cents",
+					"typeName": "int",
 					"tag": "`json:\"remainingMoney\"`"
 				}
 			]
@@ -683,6 +682,38 @@
 				{
 					"name": "d",
 					"typeName": "time.Time"
+				}
+			],
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "service",
+			"filename": "screenHelpers.go",
+			"name": "readOnly",
+			"inputArgs": [
+				{
+					"name": "is",
+					"typeName": "bool"
+				}
+			],
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "service",
+			"filename": "screenHelpers.go",
+			"name": "stringBool",
+			"inputArgs": [
+				{
+					"name": "b",
+					"typeName": "bool"
 				}
 			],
 			"outputArgs": [
