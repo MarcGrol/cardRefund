@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Duxxie/platform/backend/lib/mytime"
 	"github.com/MarcGrol/cardRefund/events"
+	"github.com/MarcGrol/cardRefund/lib/mytime"
 	uuid "github.com/satori/go.uuid"
 )
 

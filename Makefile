@@ -7,13 +7,13 @@ CARD_REFUND_ROOT := $(shell echo "${GOPATH}/src/github.com/MarcGrol/cardRefund")
 #
 # Configation for production-environment
 #
-PROD_APP_NAME := "duxxieplatformprod"
+PROD_APP_NAME := "cardrefund"
 PROD_APP_VERSION := $(shell date +"%Y-%m-%d")
-PROD_APP_HJID := "361317"
-PROD_APP_SENTRY_DSN := "https://14ca47a5f6974877ad4c74df3577ec4a@sentry.io/122796"
-PROD_SECRET_KEY_FILE := "duxxieplatformprod-clientsecret.json"
+PROD_APP_HJID := ""
+PROD_APP_SENTRY_DSN := ""
+PROD_SECRET_KEY_FILE := ""
 PROD_ANALYTICS_UID := ""
-PROD_GTM_CONTAINER_ID := "GTM-WGCXPFP"
+PROD_GTM_CONTAINER_ID := ""
 
 all: gen test install
 
@@ -24,9 +24,6 @@ help:
 	@echo "\tbackend: Run all backend tests"
 	@echo "\ttest: Run all tests"
 	@echo "\trun: Run application locally in dev mode"
-	@echo "\ttestdeploy: Deploy on test environment"
-	@echo "\tauditdeploy: Deploy on audit environment"
-	@echo "\tdemodeploy, demodeploy: Deploy on demo environment"
 	@echo "\tproddeploy, proddeploy: Deploy on production environment"
 
 checkmaster:

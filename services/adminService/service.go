@@ -1,4 +1,4 @@
-package service
+package adminService
 
 import (
 	"golang.org/x/net/context"
@@ -7,61 +7,15 @@ import (
 	"github.com/MarcGrol/cardRefund/events/store"
 	"github.com/MarcGrol/cardRefund/model"
 	"github.com/MarcGrol/cardRefund/repo"
-	"github.com/MarcGrol/golangAnnotations/generator/rest/errorh"
 )
 
 //go:generate golangAnnotations -input-dir .
 
-// @RestService( path = "/api/cardrefund" )
+// @RestService( path = "/_ah/cardrefund" )
 type CardReturnService struct {
 }
 
-type cardRefundRequest struct {
-	CardNumber             string `json:"cardNumber"`
-	OwnerEmailAddress      string `json:"ownerEmailAddress"`
-	OwnerFullName          string `json:"ownerFullName"`
-	OwnerBankAccountNumber string `json:"OwnerBankAccountNumber"`
-}
-
-// @RestOperation( method = "POST", path = "/", format = "JSON" )
-func (ts CardReturnService) askForCardRefund(c context.Context, req cardRefundRequest) (*model.CardRefund, error) {
-	cardRefund, err := repo.GetCardRefundOnCardNumber(c, req.CardNumber)
-	if err != nil {
-		if !errorh.IsNotFoundError(err) {
-			return nil, err
-		}
-	} else {
-		// already exists
-		return cardRefund, nil
-	}
-
-	// TODO validate request
-
-	refund := model.NewCardRefund()
-	err = store.StoreAndApplyEventCardRefundRequested(c, "", refund, cardRefundEvents.CardRefundRequested{
-		CardNumber:             req.CardNumber,
-		OwnerEmailAddress:      req.OwnerEmailAddress,
-		OwnerFullName:          req.OwnerFullName,
-		OwnerBankAccountNumber: req.OwnerBankAccountNumber,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return refund, nil
-}
-
 // @RestOperation( method = "GET", path = "/{cardNumber}", format = "JSON" )
-func (ts CardReturnService) getCardRefundDetails(c context.Context, cardNumber string) (*model.CardRefund, error) {
-	cardRefund, err := repo.GetCardRefundOnCardNumber(c, cardNumber)
-	if err != nil {
-		return nil, err
-	}
-
-	return cardRefund, nil
-}
-
-// @RestOperation( method = "GET", path = "/{cardNumber}/qrcode", format = "JSON" )
 func (ts CardReturnService) getCardRefundDetailsFromQrCode(c context.Context, cardNumber string) (*model.CardRefund, error) {
 	refund, err := repo.GetCardRefundOnCardNumber(c, cardNumber)
 	if err != nil {

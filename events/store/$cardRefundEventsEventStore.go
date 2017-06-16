@@ -5,8 +5,8 @@ package store
 import (
 	"golang.org/x/net/context"
 
-	"github.com/Duxxie/platform/backend/lib/mytime"
 	"github.com/MarcGrol/cardRefund/events/cardRefundEvents"
+	"github.com/MarcGrol/cardRefund/lib/mytime"
 	"github.com/MarcGrol/golangAnnotations/generator/rest/errorh"
 )
 

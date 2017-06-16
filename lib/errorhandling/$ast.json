@@ -1,0 +1,88 @@
+{
+	"structs": [
+		{
+			"packageName": "errorhandling",
+			"filename": "errorHandling.go",
+			"docLines": [
+				"// @JsonStruct()"
+			],
+			"name": "ErrorSummary",
+			"fields": [
+				{
+					"name": "SessionUID",
+					"typeName": "string",
+					"tag": "`json:\"sessionUid,omitempty\"`"
+				},
+				{
+					"name": "UserUID",
+					"typeName": "string",
+					"tag": "`json:\"userUid,omitempty\"`"
+				},
+				{
+					"name": "HTTPErrorCode",
+					"typeName": "int",
+					"tag": "`json:\"httpErrorCode\"`"
+				},
+				{
+					"packageName": "github.com/MarcGrol/golangAnnotations/generator/rest/errorh",
+					"name": "Error",
+					"typeName": "errorh.Error",
+					"tag": "`json:\"error\"`"
+				}
+			]
+		}
+	],
+	"operations": [
+		{
+			"packageName": "errorhandling",
+			"filename": "errorHandling.go",
+			"name": "HandleHttpError",
+			"inputArgs": [
+				{
+					"packageName": "golang.org/x/net/context",
+					"name": "c",
+					"typeName": "context.Context"
+				},
+				{
+					"name": "err",
+					"typeName": "error"
+				},
+				{
+					"packageName": "net/http",
+					"name": "w",
+					"typeName": "http.ResponseWriter"
+				}
+			]
+		},
+		{
+			"packageName": "errorhandling",
+			"filename": "errorHandling.go",
+			"name": "MailErrorToAdmin",
+			"inputArgs": [
+				{
+					"packageName": "golang.org/x/net/context",
+					"name": "c",
+					"typeName": "context.Context"
+				},
+				{
+					"name": "userUid",
+					"typeName": "string"
+				},
+				{
+					"name": "err",
+					"typeName": "error"
+				}
+			]
+		}
+	],
+	"typedefs": [
+		{
+			"packageName": "errorhandling",
+			"filename": "errorHandling.go",
+			"docLines": [
+				"// @JsonStruct()"
+			],
+			"name": "ErrorSummary"
+		}
+	]
+}

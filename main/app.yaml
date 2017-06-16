@@ -1,0 +1,29 @@
+runtime: go
+api_version: go1
+
+default_expiration: "5m"
+
+handlers:
+- url: /_ah/.*
+  script: _go_app
+  login: admin
+  secure: always
+
+
+- url: /user/.*
+  script: _go_app
+  secure: always
+
+- url: /api/.*
+  script: _go_app
+  secure: always
+
+- url: /tasks/.*
+  script: _go_app
+  login: admin
+  secure: always
+
+- url: /.*$
+  static_files: index.html
+  upload: index\.html
+  secure: always

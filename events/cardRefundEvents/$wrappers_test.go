@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Duxxie/platform/backend/lib/mytime"
+	"github.com/MarcGrol/cardRefund/lib/mytime"
 	"github.com/stretchr/testify/assert"
 )
 

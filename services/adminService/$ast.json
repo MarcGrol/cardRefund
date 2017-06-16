@@ -1,0 +1,334 @@
+{
+	"structs": [
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"docLines": [
+				"// @RestService( path = \"/_ah/cardrefund\" )"
+			],
+			"name": "CardReturnService",
+			"operations": [
+				{
+					"packageName": "adminService",
+					"filename": "service.go",
+					"docLines": [
+						"// @RestOperation( method = \"GET\", path = \"/{cardNumber}\", format = \"JSON\" )"
+					],
+					"relatedStruct": {
+						"name": "ts",
+						"typeName": "CardReturnService"
+					},
+					"name": "getCardRefundDetailsFromQrCode",
+					"inputArgs": [
+						{
+							"packageName": "golang.org/x/net/context",
+							"name": "c",
+							"typeName": "context.Context"
+						},
+						{
+							"name": "cardNumber",
+							"typeName": "string"
+						}
+					],
+					"outputArgs": [
+						{
+							"packageName": "github.com/MarcGrol/cardRefund/model",
+							"typeName": "model.CardRefund",
+							"isPointer": true
+						},
+						{
+							"typeName": "error"
+						}
+					]
+				},
+				{
+					"packageName": "adminService",
+					"filename": "service.go",
+					"docLines": [
+						"// @RestOperation( method = \"POST\", path = \"/{cardNumber}/money\", format = \"JSON\" )"
+					],
+					"relatedStruct": {
+						"name": "ts",
+						"typeName": "CardReturnService"
+					},
+					"name": "setRemainingMoney",
+					"inputArgs": [
+						{
+							"packageName": "golang.org/x/net/context",
+							"name": "c",
+							"typeName": "context.Context"
+						},
+						{
+							"name": "cardNumber",
+							"typeName": "string"
+						},
+						{
+							"name": "req",
+							"typeName": "setRemainingMoneyRequest"
+						}
+					],
+					"outputArgs": [
+						{
+							"packageName": "github.com/MarcGrol/cardRefund/model",
+							"typeName": "model.CardRefund",
+							"isPointer": true
+						},
+						{
+							"typeName": "error"
+						}
+					]
+				},
+				{
+					"packageName": "adminService",
+					"filename": "service.go",
+					"docLines": [
+						"// @RestOperation( method = \"PUT\", path = \"/{cardNumber}\", format = \"JSON\" )"
+					],
+					"relatedStruct": {
+						"name": "ts",
+						"typeName": "CardReturnService"
+					},
+					"name": "startRefunding",
+					"inputArgs": [
+						{
+							"packageName": "golang.org/x/net/context",
+							"name": "c",
+							"typeName": "context.Context"
+						},
+						{
+							"name": "cardNumber",
+							"typeName": "string"
+						},
+						{
+							"name": "req",
+							"typeName": "startCardRefundRequest"
+						}
+					],
+					"outputArgs": [
+						{
+							"packageName": "github.com/MarcGrol/cardRefund/model",
+							"typeName": "model.CardRefund",
+							"isPointer": true
+						},
+						{
+							"typeName": "error"
+						}
+					]
+				},
+				{
+					"packageName": "adminService",
+					"filename": "service.go",
+					"docLines": [
+						"// @RestOperation( method = \"DELETE\", path = \"/{cardNumber}\", format = \"JSON\" )"
+					],
+					"relatedStruct": {
+						"name": "ts",
+						"typeName": "CardReturnService"
+					},
+					"name": "finalizeRefunding",
+					"inputArgs": [
+						{
+							"packageName": "golang.org/x/net/context",
+							"name": "c",
+							"typeName": "context.Context"
+						},
+						{
+							"name": "cardNumber",
+							"typeName": "string"
+						}
+					],
+					"outputArgs": [
+						{
+							"packageName": "github.com/MarcGrol/cardRefund/model",
+							"typeName": "model.CardRefund",
+							"isPointer": true
+						},
+						{
+							"typeName": "error"
+						}
+					]
+				}
+			]
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"name": "setRemainingMoneyRequest",
+			"fields": [
+				{
+					"packageName": "github.com/MarcGrol/cardRefund/events/cardRefundEvents",
+					"name": "RemainingMoney",
+					"typeName": "cardRefundEvents.Cents",
+					"tag": "`json:\"remainingMoney\"`"
+				}
+			]
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"name": "startCardRefundRequest"
+		}
+	],
+	"operations": [
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"docLines": [
+				"// @RestOperation( method = \"GET\", path = \"/{cardNumber}\", format = \"JSON\" )"
+			],
+			"relatedStruct": {
+				"name": "ts",
+				"typeName": "CardReturnService"
+			},
+			"name": "getCardRefundDetailsFromQrCode",
+			"inputArgs": [
+				{
+					"packageName": "golang.org/x/net/context",
+					"name": "c",
+					"typeName": "context.Context"
+				},
+				{
+					"name": "cardNumber",
+					"typeName": "string"
+				}
+			],
+			"outputArgs": [
+				{
+					"packageName": "github.com/MarcGrol/cardRefund/model",
+					"typeName": "model.CardRefund",
+					"isPointer": true
+				},
+				{
+					"typeName": "error"
+				}
+			]
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"docLines": [
+				"// @RestOperation( method = \"POST\", path = \"/{cardNumber}/money\", format = \"JSON\" )"
+			],
+			"relatedStruct": {
+				"name": "ts",
+				"typeName": "CardReturnService"
+			},
+			"name": "setRemainingMoney",
+			"inputArgs": [
+				{
+					"packageName": "golang.org/x/net/context",
+					"name": "c",
+					"typeName": "context.Context"
+				},
+				{
+					"name": "cardNumber",
+					"typeName": "string"
+				},
+				{
+					"name": "req",
+					"typeName": "setRemainingMoneyRequest"
+				}
+			],
+			"outputArgs": [
+				{
+					"packageName": "github.com/MarcGrol/cardRefund/model",
+					"typeName": "model.CardRefund",
+					"isPointer": true
+				},
+				{
+					"typeName": "error"
+				}
+			]
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"docLines": [
+				"// @RestOperation( method = \"PUT\", path = \"/{cardNumber}\", format = \"JSON\" )"
+			],
+			"relatedStruct": {
+				"name": "ts",
+				"typeName": "CardReturnService"
+			},
+			"name": "startRefunding",
+			"inputArgs": [
+				{
+					"packageName": "golang.org/x/net/context",
+					"name": "c",
+					"typeName": "context.Context"
+				},
+				{
+					"name": "cardNumber",
+					"typeName": "string"
+				},
+				{
+					"name": "req",
+					"typeName": "startCardRefundRequest"
+				}
+			],
+			"outputArgs": [
+				{
+					"packageName": "github.com/MarcGrol/cardRefund/model",
+					"typeName": "model.CardRefund",
+					"isPointer": true
+				},
+				{
+					"typeName": "error"
+				}
+			]
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"docLines": [
+				"// @RestOperation( method = \"DELETE\", path = \"/{cardNumber}\", format = \"JSON\" )"
+			],
+			"relatedStruct": {
+				"name": "ts",
+				"typeName": "CardReturnService"
+			},
+			"name": "finalizeRefunding",
+			"inputArgs": [
+				{
+					"packageName": "golang.org/x/net/context",
+					"name": "c",
+					"typeName": "context.Context"
+				},
+				{
+					"name": "cardNumber",
+					"typeName": "string"
+				}
+			],
+			"outputArgs": [
+				{
+					"packageName": "github.com/MarcGrol/cardRefund/model",
+					"typeName": "model.CardRefund",
+					"isPointer": true
+				},
+				{
+					"typeName": "error"
+				}
+			]
+		}
+	],
+	"typedefs": [
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"docLines": [
+				"// @RestService( path = \"/_ah/cardrefund\" )"
+			],
+			"name": "CardReturnService"
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"name": "setRemainingMoneyRequest"
+		},
+		{
+			"packageName": "adminService",
+			"filename": "service.go",
+			"name": "startCardRefundRequest"
+		}
+	]
+}
