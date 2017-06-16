@@ -132,10 +132,22 @@ func refundDisplayScreen(w http.ResponseWriter, refund *model.CardRefund) {
 			<label for="remainingMoney">remainingMoney</label>
 			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control" {{ReadOnly .RemainingMoneySet}} />
 		</div>
-
+		<div class="form-group">
+			<label for="refundStarted">refundStarted</label>
+			<input name="refundStarted" value="{{StringBool .RefundStarted}}" class="form-control" readonly />
+		</div>
+		<div class="form-group">
+			<label for="refundFinalized">refundFinalized</label>
+			<input name="refundFinalized" value="{{StringBool .RefundFinalized}}" class="form-control" readonly />
+		</div>
 	<form>
-	<img src="/user/cardrefund/{{.CardNumber}}/qrcode" alt="QR code" height="250" width="250" />
-	<a href="/_ah/cardrefund/{{.CardNumber}}">Url behind qr-code</a>
+
+	{{if not .QRCodeScanned}}
+		<h2>QR code</h2>
+		<img src="/user/cardrefund/{{.CardNumber}}/qrcode" alt="QR code" height="250" width="250" />
+		<a href="/_ah/cardrefund/{{.CardNumber}}">Url behind qr-code</a>
+	{{end}}
+
 </div>
 </body>
 </html>`, refund)
@@ -182,6 +194,14 @@ func refundAdminScreen(w http.ResponseWriter, refund *model.CardRefund) {
 		<div class="form-group">
 			<label for="remainingMoney">remainingMoney</label>
 			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control" {{ReadOnly .RemainingMoneySet}} />
+		</div>
+	    <div class="form-group">
+			<label for="refundStarted">refundStarted</label>
+			<input name="refundStarted" value="{{StringBool .RefundStarted}}" class="form-control" readonly />
+		</div>
+		<div class="form-group">
+			<label for="refundFinalized">refundFinalized</label>
+			<input name="refundFinalized" value="{{StringBool .RefundFinalized}}" class="form-control" readonly />
 		</div>
 
 		<button type="submit" class="btn btn-primary"><br/>
