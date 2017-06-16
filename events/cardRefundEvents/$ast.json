@@ -69,7 +69,7 @@
 				},
 				{
 					"name": "RemainingMoney",
-					"typeName": "Cents",
+					"typeName": "int",
 					"tag": "`json:\"remainingMoney\"`"
 				},
 				{
@@ -335,12 +335,6 @@
 		}
 	],
 	"typedefs": [
-		{
-			"packageName": "cardRefundEvents",
-			"filename": "cardRefundEvents.go",
-			"name": "Cents",
-			"type": "uint"
-		},
 		{
 			"packageName": "cardRefundEvents",
 			"filename": "cardRefundEvents.go",

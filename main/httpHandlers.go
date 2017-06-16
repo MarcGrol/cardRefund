@@ -3,8 +3,7 @@ package appengine
 import (
 	"net/http"
 
-	"github.com/MarcGrol/cardRefund/services/adminService"
-	"github.com/MarcGrol/cardRefund/services/userService"
+	"github.com/MarcGrol/cardRefund/service"
 	"github.com/gorilla/mux"
 )
 
@@ -12,11 +11,7 @@ var router = mux.NewRouter()
 
 func init() {
 	{
-		s := userService.CardReturnService{}
-		s.HTTPHandlerWithRouter(router)
-	}
-	{
-		s := adminService.CardReturnService{}
+		s := service.CardReturnService{}
 		s.HTTPHandlerWithRouter(router)
 	}
 

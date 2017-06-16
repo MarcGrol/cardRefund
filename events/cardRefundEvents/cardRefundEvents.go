@@ -4,8 +4,6 @@ import "time"
 
 //go:generate golangAnnotations -input-dir .
 
-type Cents uint
-
 // @Event( aggregate = "CardRefund", isRootEvent="true")
 type CardRefundRequested struct {
 	CardNumber             string    `json:"cardNumber"`
@@ -23,7 +21,7 @@ func (e CardRefundRequested) GetUID() string {
 // @Event( aggregate = "CardRefund")
 type CardRefundRemainingMoneySet struct {
 	CardNumber     string    `json:"cardNumber"`
-	RemainingMoney Cents     `json:"remainingMoney"`
+	RemainingMoney int       `json:"remainingMoney"`
 	Timestamp      time.Time `json:"-"`
 }
 

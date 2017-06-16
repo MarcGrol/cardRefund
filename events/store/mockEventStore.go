@@ -11,7 +11,7 @@ import (
 	"github.com/MarcGrol/cardRefund/events"
 )
 
-var debug = false
+var debug = true
 
 func init() {
 	New = NewMockEventStore

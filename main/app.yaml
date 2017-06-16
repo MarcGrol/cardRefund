@@ -9,7 +9,6 @@ handlers:
   login: admin
   secure: always
 
-
 - url: /user/.*
   script: _go_app
   secure: always

@@ -52,7 +52,8 @@ func TestCardRefundRemainingMoneySetWrapper(t *testing.T) {
 
 	event := CardRefundRemainingMoneySet{
 
-		CardNumber: "Example3CardNumber",
+		CardNumber:     "Example3CardNumber",
+		RemainingMoney: 42,
 	}
 	wrapped, err := event.Wrap("test_session")
 	assert.NoError(t, err)

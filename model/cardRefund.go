@@ -7,12 +7,13 @@ import (
 )
 
 type CardRefund struct {
-	CardNumber      string                  `json:"cardNumber"`
-	Owner           Owner                   `json:"owner"`
-	RemainingMoney  *cardRefundEvents.Cents `json:"remainingMoney"`
-	QRCodeScanned   bool                    `json:"qrCodeScanned"`
-	RefundStarted   bool                    `json:"refundStarted"`
-	RefundFinalized bool                    `json:"refundFinalized"`
+	CardNumber        string `json:"cardNumber"`
+	Owner             Owner  `json:"owner"`
+	QRCodeScanned     bool   `json:"qrCodeScanned"`
+	RemainingMoney    int    `json:"remainingMoney"`
+	RemainingMoneySet bool   `json:"remainingMoneySet"`
+	RefundStarted     bool   `json:"refundStarted"`
+	RefundFinalized   bool   `json:"refundFinalized"`
 }
 
 type Owner struct {
@@ -34,11 +35,12 @@ func (cr *CardRefund) ApplyCardRefundRequested(c context.Context, event cardRefu
 }
 
 func (cr *CardRefund) ApplyCardRefundRemainingMoneySet(c context.Context, event cardRefundEvents.CardRefundRemainingMoneySet) {
-	cr.RemainingMoney = &event.RemainingMoney
+	cr.RemainingMoney = event.RemainingMoney
+	cr.RemainingMoneySet = true
 }
 
 func (cr *CardRefund) ApplyCardQRCodeScanned(c context.Context, event cardRefundEvents.CardQRCodeScanned) {
-	cr.RefundFinalized = true
+	cr.QRCodeScanned = true
 }
 
 func (cr *CardRefund) ApplyCardRefundStarted(c context.Context, event cardRefundEvents.CardRefundStarted) {
