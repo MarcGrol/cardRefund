@@ -1,0 +1,393 @@
+{
+	"structs": [
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\", isRootEvent=\"true\")"
+			],
+			"name": "CardRefundRequested",
+			"fields": [
+				{
+					"name": "CardNumber",
+					"typeName": "string",
+					"tag": "`json:\"cardNumber\"`"
+				},
+				{
+					"name": "OwnerEmailAddress",
+					"typeName": "string",
+					"tag": "`json:\"ownerEmailAddress\"`"
+				},
+				{
+					"name": "OwnerFullName",
+					"typeName": "string",
+					"tag": "`json:\"ownerFullName\"`"
+				},
+				{
+					"name": "OwnerBankAccountNumber",
+					"typeName": "string",
+					"tag": "`json:\"OwnerBankAccountNumber\"`"
+				},
+				{
+					"name": "Timestamp",
+					"typeName": "time.Time",
+					"tag": "`json:\"-\"`"
+				}
+			],
+			"operations": [
+				{
+					"packageName": "cardRefundEvents",
+					"filename": "cardRefundEvents.go",
+					"docLines": [
+						"// GetUID indicates which field of the struct is used to indicate aggregate-uid"
+					],
+					"relatedStruct": {
+						"name": "e",
+						"typeName": "CardRefundRequested"
+					},
+					"name": "GetUID",
+					"outputArgs": [
+						{
+							"typeName": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundRemainingMoneySet",
+			"fields": [
+				{
+					"name": "CardNumber",
+					"typeName": "string",
+					"tag": "`json:\"cardNumber\"`"
+				},
+				{
+					"name": "RemainingMoney",
+					"typeName": "Cents",
+					"tag": "`json:\"remainingMoney\"`"
+				},
+				{
+					"name": "Timestamp",
+					"typeName": "time.Time",
+					"tag": "`json:\"-\"`"
+				}
+			],
+			"operations": [
+				{
+					"packageName": "cardRefundEvents",
+					"filename": "cardRefundEvents.go",
+					"relatedStruct": {
+						"name": "e",
+						"typeName": "CardRefundRemainingMoneySet"
+					},
+					"name": "GetUID",
+					"outputArgs": [
+						{
+							"typeName": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundStarted",
+			"fields": [
+				{
+					"name": "CardNumber",
+					"typeName": "string",
+					"tag": "`json:\"cardNumber\"`"
+				},
+				{
+					"name": "Timestamp",
+					"typeName": "time.Time",
+					"tag": "`json:\"-\"`"
+				}
+			],
+			"operations": [
+				{
+					"packageName": "cardRefundEvents",
+					"filename": "cardRefundEvents.go",
+					"relatedStruct": {
+						"name": "e",
+						"typeName": "CardRefundStarted"
+					},
+					"name": "GetUID",
+					"outputArgs": [
+						{
+							"typeName": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundFinalized",
+			"fields": [
+				{
+					"name": "CardNumber",
+					"typeName": "string",
+					"tag": "`json:\"cardNumber\"`"
+				},
+				{
+					"name": "Timestamp",
+					"typeName": "time.Time",
+					"tag": "`json:\"-\"`"
+				}
+			],
+			"operations": [
+				{
+					"packageName": "cardRefundEvents",
+					"filename": "cardRefundEvents.go",
+					"relatedStruct": {
+						"name": "e",
+						"typeName": "CardRefundFinalized"
+					},
+					"name": "GetUID",
+					"outputArgs": [
+						{
+							"typeName": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardQRCodeScanned",
+			"fields": [
+				{
+					"name": "CardNumber",
+					"typeName": "string",
+					"tag": "`json:\"cardNumber\"`"
+				},
+				{
+					"name": "Timestamp",
+					"typeName": "time.Time",
+					"tag": "`json:\"-\"`"
+				}
+			],
+			"operations": [
+				{
+					"packageName": "cardRefundEvents",
+					"filename": "cardRefundEvents.go",
+					"relatedStruct": {
+						"name": "e",
+						"typeName": "CardQRCodeScanned"
+					},
+					"name": "GetUID",
+					"outputArgs": [
+						{
+							"typeName": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundFailed",
+			"fields": [
+				{
+					"name": "CardNumber",
+					"typeName": "string",
+					"tag": "`json:\"cardNumber\"`"
+				},
+				{
+					"name": "FailureReason",
+					"typeName": "string",
+					"tag": "`json:\"failureReason\"`"
+				},
+				{
+					"name": "Timestamp",
+					"typeName": "time.Time",
+					"tag": "`json:\"-\"`"
+				}
+			],
+			"operations": [
+				{
+					"packageName": "cardRefundEvents",
+					"filename": "cardRefundEvents.go",
+					"relatedStruct": {
+						"name": "e",
+						"typeName": "CardRefundFailed"
+					},
+					"name": "GetUID",
+					"outputArgs": [
+						{
+							"typeName": "string"
+						}
+					]
+				}
+			]
+		}
+	],
+	"operations": [
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// GetUID indicates which field of the struct is used to indicate aggregate-uid"
+			],
+			"relatedStruct": {
+				"name": "e",
+				"typeName": "CardRefundRequested"
+			},
+			"name": "GetUID",
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"relatedStruct": {
+				"name": "e",
+				"typeName": "CardRefundRemainingMoneySet"
+			},
+			"name": "GetUID",
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"relatedStruct": {
+				"name": "e",
+				"typeName": "CardRefundStarted"
+			},
+			"name": "GetUID",
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"relatedStruct": {
+				"name": "e",
+				"typeName": "CardRefundFinalized"
+			},
+			"name": "GetUID",
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"relatedStruct": {
+				"name": "e",
+				"typeName": "CardQRCodeScanned"
+			},
+			"name": "GetUID",
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"relatedStruct": {
+				"name": "e",
+				"typeName": "CardRefundFailed"
+			},
+			"name": "GetUID",
+			"outputArgs": [
+				{
+					"typeName": "string"
+				}
+			]
+		}
+	],
+	"typedefs": [
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"name": "Cents",
+			"type": "uint"
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\", isRootEvent=\"true\")"
+			],
+			"name": "CardRefundRequested"
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundRemainingMoneySet"
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundStarted"
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundFinalized"
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardQRCodeScanned"
+		},
+		{
+			"packageName": "cardRefundEvents",
+			"filename": "cardRefundEvents.go",
+			"docLines": [
+				"// @Event( aggregate = \"CardRefund\")"
+			],
+			"name": "CardRefundFailed"
+		}
+	]
+}
