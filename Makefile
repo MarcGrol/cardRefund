@@ -2,7 +2,7 @@ GO := $(shell which go)
 GO_VERSION := $(shell $(GO) version)
 GOAPP := $(shell which goapp)
 
-DUXXIE_PLATFORM_ROOT := $(shell echo "${GOPATH}/src/github.com/Duxxie/platform")
+CARD_REFUND_ROOT := $(shell echo "${GOPATH}/src/github.com/MarcGrol/cardRefund")
 
 #
 # Configation for production-environment
@@ -47,8 +47,8 @@ deps:
 	govendor sync -v                                    # populate vendor directory with specified version of golangAnnotations
 	govendor install +vendor                            # make sure we get the vendored version of golangAnnotations
 	go get -t ./...                                     # get the application with all its deps
-	$(DUXXIE_PLATFORM_ROOT)/scripts/get_appengine.sh    # Need appengine to run goapp tests and to deploy
-	$(DUXXIE_PLATFORM_ROOT)/scripts/get_gcloud.sh       # Need gcloud to perform deployment
+	$(CARD_REFUND_ROOT)/scripts/get_appengine.sh    # Need appengine to run goapp tests and to deploy
+	$(CARD_REFUND_ROOT)/scripts/get_gcloud.sh       # Need gcloud to perform deployment
 	(cd emails; yarn install; yarn run build;)          # build email templates (used in backend)
 	(cd frontend; yarn install;)                        # prepare environment for frontend application
 
@@ -95,7 +95,7 @@ coverage:
 	@echo "-------------"
 	@echo "Running coverage"
 	@echo "-------------"
-	$(DUXXIE_PLATFORM_ROOT)/scripts/coverage.sh --html
+	$(CARD_REFUND_ROOT)/scripts/coverage.sh --html
 
 install:
 	@echo "----------------"
@@ -118,19 +118,19 @@ run:
 	@echo "------------------------------------------"
 	@echo "Running $(APP_NAME):$(APP_VERSION) locally"
 	@echo "------------------------------------------"
-	$(GOAPP) serve -host=0.0.0.0 $(DUXXIE_PLATFORM_ROOT)/main/
+	$(GOAPP) serve -host=0.0.0.0 $(CARD_REFUND_ROOT)/main/
 
 e2erun:
 	@echo "------------------------------------------"
 	@echo "Running $(APP_NAME):$(APP_VERSION) locally"
 	@echo "------------------------------------------"
-	dev_appserver.py --clear_datastore --port=8888 --env_var DEV_E2E_MODE=true --skip_sdk_update_check true $(DUXXIE_PLATFORM_ROOT)/main/app.yaml
+	dev_appserver.py --clear_datastore --port=8888 --env_var DEV_E2E_MODE=true --skip_sdk_update_check true $(CARD_REFUND_ROOT)/main/app.yaml
 
 clearrun:
 	@echo "------------------------------------------"
 	@echo "Running $(APP_NAME):$(APP_VERSION) locally"
 	@echo "------------------------------------------"
-	$(GOAPP) serve -clear_datastore -host=0.0.0.0 $(DUXXIE_PLATFORM_ROOT)/main/
+	$(GOAPP) serve -clear_datastore -host=0.0.0.0 $(CARD_REFUND_ROOT)/main/
 
 deploy:
 	@echo "---------------------------------------------------------------"
