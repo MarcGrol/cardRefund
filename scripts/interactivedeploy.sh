@@ -6,10 +6,10 @@ then
     exit -1
 fi
 
-DUXXIE_PLATFORM_HOME="${GOPATH}/src/github.com/Duxxie/platform"
-if [ ! -d "${DUXXIE_PLATFORM_HOME}" ]
+CARD_REFUND_HOME="${GOPATH}/src/github.com/MarcGrol/cardRefund"
+if [ ! -d "${CARD_REFUND_HOME}" ]
 then
-    echo "We need a duxxie source-tree: ${DUXXIE_PLATFORM_HOME}"
+    echo "We need a duxxie source-tree: ${CARD_REFUND_HOME}"
     exit -1
 fi
 
@@ -26,11 +26,10 @@ LOCAL_MODIFICATIONS=$(git diff --name-only)
 # End user will be prompted to select google credemtials
 #
 (\
-cd ${DUXXIE_PLATFORM_HOME}; \
+cd ${CARD_REFUND_HOME}; \
 appcfg.py update \
     --application "${APP_NAME}" \
     --version "${APP_VERSION}"  \
-    --env_variable DUXXIE_VERSION:"${GIT_TAG}" \
     --env_variable GIT_COMMIT_HASH:"${GIT_VERSION}" \
     --env_variable DEPLOYER:"${DEPLOYER}" \
     --env_variable DEPLOYMENT_TIMESTAMP:"${DEPLOYMENT_TIMESTAMP}"  \

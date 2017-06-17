@@ -7,8 +7,8 @@ CARD_REFUND_ROOT := $(shell echo "${GOPATH}/src/github.com/MarcGrol/cardRefund")
 #
 # Configation for production-environment
 #
-PROD_APP_NAME := "cardrefund"
-PROD_APP_VERSION := $(shell date +"%Y-%m-%d")
+PROD_APP_NAME := "cardrefund-170923"
+PROD_APP_VERSION := "1"
 PROD_APP_HJID := ""
 PROD_APP_SENTRY_DSN := ""
 PROD_SECRET_KEY_FILE := ""
@@ -131,7 +131,11 @@ deploy:
 	@echo "---------------------------------------------------------------"
 	@echo "Deploying interactively $(PROD_APP_NAME):$(PROD_APP_VERSION) to the cloud"
 	@echo "---------------------------------------------------------------"
-	./scripts/interactivedeploy.sh $(PROD_APP_NAME) $(PROD_APP_VERSION)
+	@export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+	gcloud config set account marc.grol@gmail.com
+	gcloud config set project $(PROD_APP_NAME)
+	gcloud  app deploy --project $(PROD_APP_NAME) --version $(APP_VERSION) main/app.yaml
+	gcloud datastore create-indexes main/index.yaml
 
 prodvars:
 	$(eval APP_NAME := $(PROD_APP_NAME))
@@ -149,5 +153,4 @@ proddeploy: prodbuild deploy
 .PHONY:
 	help deps verify gen test backendtest backend coverage install clean run e2erun \
 	clearrun all \
-	travisdeploy deploy \
 	prodvars prodbuild proddeploy

@@ -14,6 +14,6 @@ func AppID(_ context.Context) string {
 	return "mockApp"
 }
 
-func GetDomainName() string {
+func GetDomainName(c context.Context) string {
 	return "http://localhost:8080"
 }

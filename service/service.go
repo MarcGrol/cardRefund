@@ -10,9 +10,9 @@ import (
 
 	"strconv"
 
-	"github.com/Duxxie/platform/backend/lib/environ"
 	"github.com/MarcGrol/cardRefund/events/cardRefundEvents"
 	"github.com/MarcGrol/cardRefund/events/store"
+	"github.com/MarcGrol/cardRefund/lib/environ"
 	"github.com/MarcGrol/cardRefund/lib/logging"
 	"github.com/MarcGrol/cardRefund/lib/util"
 	"github.com/MarcGrol/cardRefund/model"
@@ -87,7 +87,7 @@ func (crs CardReturnService) getCardRefundQRScreen(c context.Context, cardNumber
 		return nil, err
 	}
 	return qrcode.Encode(
-		fmt.Sprintf("%s/_ah/cardrefund/%s", environ.DomainName(c),
+		fmt.Sprintf("%s/_ah/cardrefund/%s", environ.GetDomainName(c),
 			cardRefund.CardNumber), qrcode.Medium, 256)
 }
 
