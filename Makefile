@@ -134,8 +134,8 @@ deploy:
 	@export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 	gcloud config set account marc.grol@gmail.com
 	gcloud config set project $(PROD_APP_NAME)
-	gcloud  app deploy --project $(PROD_APP_NAME) --version $(APP_VERSION) main/app.yaml
-	gcloud datastore create-indexes main/index.yaml
+	gcloud  app deploy --quiet --project $(PROD_APP_NAME) --version $(APP_VERSION) main/app.yaml
+	#gcloud datastore create-indexes main/index.yaml
 
 prodvars:
 	$(eval APP_NAME := $(PROD_APP_NAME))

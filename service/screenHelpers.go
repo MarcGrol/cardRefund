@@ -27,7 +27,12 @@ func refundInputScreen(w http.ResponseWriter, req cardRefundRequest) {
 <body>
 <div class="container">
 
-    <h1>Ask for a card refund</h1>
+    <h1>Klant en kaartgegevens voor terugstorten tegoed op OV-kaart</h1>
+
+	<p>Vul het volgende formulier in zodat Translink het proces van terugstorten van tegoed op OV-kaart in gang kan zetten.</br>
+    NB: We vragen om je e-mail adres om te bij elke stap op de hoogte te houden.
+    </p>
+
     <form action="/user/cardrefund" method="POST">
 
         {{if .ErrorMessage}}
@@ -37,24 +42,24 @@ func refundInputScreen(w http.ResponseWriter, req cardRefundRequest) {
         {{end}}
 
         <div class="form-group">
-            <label for="cardNumber">cardNumber</label>
-            <input type="text" name="cardNumber" value="{{.CardNumber}}" class="form-control"/>
+            <label for="cardNumber">Kaart-nummer:</label>
+            <input type="text" name="cardNumber" value="{{.CardNumber}}" class="form-control  input-sm"/>
         </div>
         <div class="form-group">
-            <label for="ownerEmailAddress">ownerEmailAddress</label>
-            <input type="email" name="ownerEmailAddress" value="{{.OwnerEmailAddress}}" class="form-control"/>
+            <label for="ownerEmailAddress">e-mail adres:</label>
+            <input type="email" name="ownerEmailAddress" value="{{.OwnerEmailAddress}}" class="form-control  input-sm"/>
         </div>
         <div class="form-group">
-            <label for="ownerFullName">ownerFullName</label>
-            <input type="text" name="ownerFullName" value="{{.OwnerFullName}}" class="form-control"/>
+            <label for="ownerFullName">Volledige naam</label>
+            <input type="text" name="ownerFullName" value="{{.OwnerFullName}}" class="form-control  input-sm"/>
         </div>
         <div class="form-group">
-            <label for="ownerBankAccountNumber">ownerBankAccountNumber:</label>
-            <input type="text" name="ownerBankAccountNumber" value="{{.OwnerBankAccountNumber}}" class="form-control"/>
+            <label for="ownerBankAccountNumber">Bankrekeningnummer:</label>
+            <input type="text" name="ownerBankAccountNumber" value="{{.OwnerBankAccountNumber}}" class="form-control  input-sm"/>
         </div>
 
-        <button type="submit" class="btn btn-primary"><br/>
-            Submit card refund
+        <button type="submit" class="btn btn-primary">
+            Vraag om terugstorting
         </button>
 
     </form>
@@ -106,47 +111,86 @@ func refundDisplayScreen(w http.ResponseWriter, refund *model.CardRefund) {
 <body>
 <div class="container">
 
-    <h1>Card details</h1>
-    <form>
-        <div class="form-group">
-            <label for="cardNumber">cardNumber</label>
-            <input type="text" name="cardNumber" value="{{.CardNumber}}" readonly class="form-control"/>
-        </div>
-        <div class="form-group">
-            <label for="ownerEmailAddress">ownerEmailAddress</label>
-            <input type="email" name="ownerEmailAddress" value="{{.Owner.EmailAddress}}" readonly class="form-control"/>
-        </div>
-        <div class="form-group">
-			<label for="ownerFullName">ownerFullName</label>
-			<input type="text" name="ownerFullName" value="{{.Owner.FullName}}" readonly class="form-control"/>
-		</div>
-		<div class="form-group">
-			<label for="ownerBankAccountNumber">ownerBankAccountNumber</label>
-			<input type="text" name="ownerBankAccountNumber" value="{{.Owner.BankAccountNumber}}" readonly class="form-control"/>
-		</div>
-		<div class="form-group">
-			<label for="remainingMoneySet">remainingMoneySet</label>
-			<input type="text" name="remainingMoneySet" value="{{StringBool .RemainingMoneySet}}" class="form-control" readonly />
-		</div>
-		<div class="form-group">
-			<label for="remainingMoney">remainingMoney</label>
-			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control" {{ReadOnly .RemainingMoneySet}} />
-		</div>
-		<div class="form-group">
-			<label for="refundStarted">refundStarted</label>
-			<input name="refundStarted" value="{{StringBool .RefundStarted}}" class="form-control" readonly />
-		</div>
-		<div class="form-group">
-			<label for="refundFinalized">refundFinalized</label>
-			<input name="refundFinalized" value="{{StringBool .RefundFinalized}}" class="form-control" readonly />
-		</div>
-	<form>
+    <h1>Aanvraag voor terugstorting ingediend.</h1>
+
+	<p>Je aanvraag voor terugstorting van tegoed op OV-kaart is ingediend.</p>
 
 	{{if not .QRCodeScanned}}
-		<h2>QR code</h2>
-		<img src="/user/cardrefund/{{.CardNumber}}/qrcode" alt="QR code" height="250" width="250" />
-		<a href="/_ah/cardrefund/{{.CardNumber}}">Url behind qr-code</a>
-	{{end}}
+	<div class="row">
+	    <h2>Instructie</h2>
+		<p>Print deze pagina uit en stuur het samen met de OV-kaart in een envelop naar het volgende adres:</br>
+		Translink</br>
+		Stationsplein 151-157</br>
+		3818 LE Amersfoort</br>
+		</p>
+	</div>
+    {{end}}
+
+	<div class="row">
+		<h2>Klant en kaart gegevens</h2>
+		<div class="table-responsive">
+		<table class="table">
+		 <tr>
+				<td>Kaart-nummer:</td>
+				<td>{{.CardNumber}}</td>
+		 </tr>
+		 <tr>
+				<td>E-mail adres</td>
+				<td>{{.Owner.EmailAddress}}</td>
+		 </tr>
+		 <tr>
+				<td>Volledige naam</label>
+				<td>{{.Owner.FullName}}</td>
+		 </tr>
+		 <tr>
+				<td>Bankrekeningnummer</label>
+				<td>{{.Owner.BankAccountNumber}}</td>
+		 </tr>
+		 <tr>
+				<td>Resterend tegoed</label>
+				{{if .RemainingMoneySet}}
+					<td>{{.RemainingMoney}}</td>
+				{{else}}
+					<td>Nog niet bekend</td>
+				{{end}}
+		</tr>
+		</table>
+	</div>
+
+   	<div class="row">
+		<h2>Hoe nu verder?</h2>
+	   <ul>
+		   <li>
+			{{if not .QRCodeScanned}}
+				Jouw brief is nog niet ontvangen door Translink. Zit ie al op de post?
+			{{else}}
+				Jouw brief is ontvangen door Translink.
+			{{end}}
+			</li>
+
+		   <li>
+			{{if .RemainingMoneySet}}
+				Het resterende saldo is bepaald op {{.RemainingMoney}}
+			{{else}}
+				Het resterende saldo is nog niet bepaald.
+			{{end}}
+			</li>
+			<li>
+				 Je wordt via {{.Owner.EmailAddress}} op de hoogte gehouden van vervolg stappen.
+			</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		{{if not .QRCodeScanned}}
+			<h2>Informatie voor voor adminstratie Translink</h2>
+			<p>
+			Scan de QR-code hieronder om de gegevens van de klant er veilig bij te halen:
+			</p>
+			<img src="/user/cardrefund/{{.CardNumber}}/qrcode" alt="QR code" height="250" width="250" />
+		{{end}}
+	</div>
+
 
 </div>
 </body>
@@ -168,45 +212,55 @@ func refundAdminScreen(w http.ResponseWriter, refund *model.CardRefund) {
 <body>
 <div class="container">
 
-    <h1>Card details</h1>
-    <form action="/_ah/cardrefund/{{.CardNumber}}" method="POST">
-        <div class="form-group">
-            <label for="cardNumber">cardNumber</label>
-            <input type="text" name="cardNumber" value="{{.CardNumber}}" readonly class="form-control"/>
-        </div>
-        <div class="form-group">
-            <label for="ownerEmailAddress">ownerEmailAddress</label>
-            <input type="email" name="ownerEmailAddress" value="{{.Owner.EmailAddress}}" readonly class="form-control"/>
-        </div>
-        <div class="form-group">
-			<label for="ownerFullName">ownerFullName</label>
-			<input type="text" name="ownerFullName" value="{{.Owner.FullName}}" readonly class="form-control"/>
-		</div>
-		<div class="form-group">
-			<label for="ownerBankAccountNumber">ownerBankAccountNumber</label>
-			<input type="text" name="ownerBankAccountNumber" value="{{.Owner.BankAccountNumber}}" readonly class="form-control"/>
-		</div>
+	<h1>Klant en kaart gegevens</h1>
 
-		<div class="form-group">
-			<label for="remainingMoneySet">remainingMoneySet</label>
-			<input type="text" name="remainingMoneySet" value="{{StringBool .RemainingMoneySet}}" class="form-control" readonly />
-		</div>
-		<div class="form-group">
-			<label for="remainingMoney">remainingMoney</label>
-			<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control" {{ReadOnly .RemainingMoneySet}} />
-		</div>
-	    <div class="form-group">
-			<label for="refundStarted">refundStarted</label>
-			<input name="refundStarted" value="{{StringBool .RefundStarted}}" class="form-control" readonly />
-		</div>
-		<div class="form-group">
-			<label for="refundFinalized">refundFinalized</label>
-			<input name="refundFinalized" value="{{StringBool .RefundFinalized}}" class="form-control" readonly />
-		</div>
+   	<div class="row">
 
-		<button type="submit" class="btn btn-primary"><br/>
-            Start refund process
-        </button>
+		<div class="table-responsive">
+		<table class="table">
+		 <tr>
+				<td>Kaart-nummer:</td>
+				<td>{{.CardNumber}}</td>
+		</tr>
+		 <tr>
+				<td>E-mail adres</td>
+				<td>{{.Owner.EmailAddress}}</td>
+		</tr>
+		 <tr>
+				<td>Volledige naam</label>
+				<td>{{.Owner.FullName}}</td>
+		</tr>
+		 <tr>
+				<td>Bankrekeningnummer</label>
+				<td>{{.Owner.BankAccountNumber}}</td>
+		</tr>
+		 <tr>
+			{{if .RemainingMoneySet}}
+				<td>Resterend tegoed</label>
+				<td>{{.RemainingMoney}}</td>
+			{{end}}
+		</tr>
+	  </table>
+	  </div>
+  </div>
+
+
+	{{if not .RemainingMoneySet}}
+   	<div class="row">
+		<p>
+			Het tegoed op de kaart moet nog bepaald worden
+		</p>
+    	<form action="/_ah/cardrefund/{{.CardNumber}}" method="POST">
+			<div class="form-group">
+				<label for="remainingMoney">Resterend tegoed</label>
+				<input type="number" name="remainingMoney" value="{{.RemainingMoney}}" class="form-control input-sm" />
+			</div>
+
+			<button type="submit" class="btn btn-primary">
+            	Stel het resterende tegoed in
+        	</button>
+	</div>
+	{{end}}
 
 	<form>
 </div>
@@ -240,8 +294,6 @@ func applyTemplateToString(w io.Writer, templateName string, templateItself stri
 var customTemplateFuncs = template.FuncMap{
 	"FormatDateTime": formatDateTime,
 	"FormatDate":     formatDate,
-	"ReadOnly":       readOnly,
-	"StringBool":     stringBool,
 }
 
 func formatDateTime(dt *time.Time) string {
@@ -253,15 +305,4 @@ func formatDateTime(dt *time.Time) string {
 
 func formatDate(d time.Time) string {
 	return time.Time(d).Format("2006-01-02")
-}
-
-func readOnly(is bool) string {
-	if is {
-		return `readonly`
-	}
-	return ""
-}
-
-func stringBool(b bool) string {
-	return fmt.Sprintf("%v", b)
 }

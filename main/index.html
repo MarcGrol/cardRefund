@@ -1,9 +1,35 @@
-<htm>
-    <head>
-    </head>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
 
     <body>
-    <h1>Card refund</h1>
-    <a href="/user/cardrefund">Ask for card refund</a>
-    </body>
-</htm>
+    <h1>DEMO: Terugvragen tegoed op anonieme OV-kaart</h1>
+    <h2>Introductie</h2>
+    <p>
+        Je hebt nog een oude, anonieme OV-kaart die je niet meer gebruikt waar nog tegoed op staat.</br>
+        Kan je dit tegoed teruggestort krijgen op je bankrekening?</br>
+        Dat zou kunnen. Deze site geeft een voorbeeld hoe dit process ingericht zou kunnen worden.
+    </p>
+    <h2>Stappenplan</h2>
+    <ol>
+        <li>Klant vult zijn kaartnummer, e-mail adres, naam en bankrekening-nummer in op <a href="/user/cardrefund">dit</a> formulier in</li>
+        <li>Klant print resulterende pagina (met QR code) uit</li>
+        <li>Klant stuurt uitgeprinte pagina en OV-kaart samen in envelop en stuurt deze naar Translink</li>
+        <li>Translink ontvangt envelop en scant de QR-code op brief (met mobiele telefoon).
+            De details van de aanvraag veschijnen nu op het veilige admin-scherm</li>
+        <li>Translink bepaald tegoed op OV-kaart en vult dit in op admin-scherm</li>
+        <li>Translink zet het process van geld terugstorten op rekening van klant in werking</li>
+    </ol>
+    <p>
+    NB: E-mail adres van de klant is handig om klant bij elke stap in de loop te houden.
+    </p>
+</div>
+</body>
+</html>

@@ -692,38 +692,6 @@
 		},
 		{
 			"packageName": "service",
-			"filename": "screenHelpers.go",
-			"name": "readOnly",
-			"inputArgs": [
-				{
-					"name": "is",
-					"typeName": "bool"
-				}
-			],
-			"outputArgs": [
-				{
-					"typeName": "string"
-				}
-			]
-		},
-		{
-			"packageName": "service",
-			"filename": "screenHelpers.go",
-			"name": "stringBool",
-			"inputArgs": [
-				{
-					"name": "b",
-					"typeName": "bool"
-				}
-			],
-			"outputArgs": [
-				{
-					"typeName": "string"
-				}
-			]
-		},
-		{
-			"packageName": "service",
 			"filename": "service.go",
 			"docLines": [
 				"// @RestOperation( method = \"GET\", path = \"/user/cardrefund\", nowrap = \"true\" )"
